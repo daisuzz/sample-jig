@@ -20,4 +20,4 @@ jobs:
       with:
         arguments: clean build jig
     - name: Publish to GitHub pages
-      run: mv ./build/jig/ ./docs/
+      run: rm -rf ./docs && mkdir ./docs && cp -RT ./build/jig/ ./docs/

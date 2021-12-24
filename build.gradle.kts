@@ -23,8 +23,3 @@ tasks.test {
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "11"
 }
-
-jig {
-    modelPattern = ".+"
-
-}
