@@ -11,13 +11,12 @@ class BookmarksTest {
     fun ブックマークが9件登録されている場合新しいブックマークが登録できる() {
 
         val bookmarks = Bookmarks(
-            (1..9).map {
-                Bookmark(Url("example.com/$it"), " $it")
-            }.toMutableSet()
+            (1..9).associate {
+                val url = Url.of("example.com/$it")
+                url to Bookmark(url, " $it")
+            }.toMutableMap()
         )
-
-        val newBookmark = Bookmark(Url("example.com/new"), "new")
-
+        val newBookmark = Bookmark(Url.of("example.com/new"), "new")
         bookmarks.add(newBookmark)
 
         assertEquals(10, bookmarks.value.size)
@@ -27,12 +26,13 @@ class BookmarksTest {
     fun ブックマークが10件登録されている場合新しいブックマークが登録できない() {
 
         val bookmarks = Bookmarks(
-            (1..10).map {
-                Bookmark(Url("example.com/$it"), " $it")
-            }.toMutableSet()
+            (1..10).associate {
+                val url = Url.of("example.com/$it")
+                url to Bookmark(url, " $it")
+            }.toMutableMap()
         )
 
-        val newBookmark = Bookmark(Url("example.com/new"), "new")
+        val newBookmark = Bookmark(Url.of("example.com/new"), "new")
 
         val exception = assertThrows<ApplicationException> { bookmarks.add(newBookmark) }
         assertEquals("上限エラー", exception.message)
@@ -42,12 +42,13 @@ class BookmarksTest {
     fun ブックマークの名前を変更できる() {
 
         val bookmarks = Bookmarks(
-            (1..10).map {
-                Bookmark(Url("example.com/$it"), " $it")
-            }.toMutableSet()
+            (1..10).associate {
+                val url = Url.of("example.com/$it")
+                url to Bookmark(url, " $it")
+            }.toMutableMap()
         )
 
-        bookmarks.update("example.com/1", "one")
+        bookmarks.update(Url.of("example.com/1"), "one")
 
         assertEquals("one", bookmarks.get("example.com/1")?.name)
     }

@@ -3,47 +3,33 @@ package com.daisuzz.domain.bookmark
 import com.daisuzz.domain.exception.ApplicationException
 
 /**
- * ブラウザのブックマークのサンプル
+ * ブックマーク機能のサンプルコード
  * ・上限10件
- * ・同じURLは登録できない
+ * ・同じURLを複数登録できない
  * ・ブックマークの登録/削除/名前の変更が可能
  */
 data class Bookmarks(
-    val value: MutableSet<Bookmark>
+    val value: MutableMap<Url, Bookmark>
 ) {
 
     fun get(url: String): Bookmark? {
-        return value.find { it.url.value == url }
+        return value[Url.of(url)]
     }
 
     fun add(bookmark: Bookmark) {
         require(value.size < 10) {
             throw ApplicationException("上限エラー")
         }
-        value.add(bookmark)
+        value[bookmark.url] = bookmark
     }
 
     fun delete(bookmark: Bookmark) {
-        value.remove(bookmark)
+        value.remove(bookmark.url)
     }
 
-    fun update(_url: String, name: String) {
-        val url = Url(_url)
-        value.removeIf { it.url == url }
+    fun update(url: Url, name: String) {
+        value.remove(url)
         val new = Bookmark(url, name)
-        value.add(new)
-    }
-}
-
-data class Bookmark(
-    val url: Url,
-    val name: String,
-)
-
-data class Url(val _url: String) {
-    val value: String = if (_url.isNotEmpty()) {
-        _url
-    } else {
-        throw IllegalArgumentException()
+        value[url] = new
     }
 }
