@@ -3,7 +3,7 @@ package com.daisuzz.domain.bookmark
 import com.daisuzz.domain.exception.ApplicationException
 
 /**
- * ブックマーク機能のサンプルコード
+ * ブックマークリスト
  * ・上限10件
  * ・同じURLを複数登録できない
  * ・ブックマークの登録/削除/名前の変更が可能

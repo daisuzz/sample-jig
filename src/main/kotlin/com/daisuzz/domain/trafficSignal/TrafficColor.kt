@@ -1,5 +1,8 @@
 package com.daisuzz.domain.trafficSignal
 
+/**
+ * 信号色
+ */
 enum class TrafficColor {
     RED {
         override fun nextColor(): TrafficColor {

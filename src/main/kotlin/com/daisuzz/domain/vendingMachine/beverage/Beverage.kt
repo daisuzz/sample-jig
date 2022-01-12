@@ -1,5 +1,8 @@
 package com.daisuzz.domain.vendingMachine.beverage
 
+/**
+ * 飲み物
+ */
 sealed class Beverage(val id: BeverageId, private val price: Int) {
     class Water : Beverage(BeverageId(1), 100)
     class Tea : Beverage(BeverageId(2), 150)

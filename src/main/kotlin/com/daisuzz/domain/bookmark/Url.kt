@@ -2,6 +2,9 @@ package com.daisuzz.domain.bookmark
 
 import com.daisuzz.domain.exception.ApplicationException
 
+/**
+ * URL
+ */
 data class Url private constructor(val value: String) {
 
     companion object {

@@ -6,7 +6,7 @@ import com.daisuzz.domain.vendingMachine.beverage.BeverageId
 import com.daisuzz.domain.vendingMachine.beverage.Stock
 
 /**
- * 自動販売機のサンプルコード
+ * 自動販売機
  * - 自動販売機では飲み物(水, お茶, コーヒー)を販売している
  * - お金を投入できる
  * - 投入した金額内の飲み物のうち在庫がある飲み物を購入できる
